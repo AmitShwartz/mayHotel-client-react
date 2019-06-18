@@ -5,6 +5,7 @@ import Box from "../../../components/Box/Box";
 import CancelButton from "../../../components/CancelButton/CancelButton";
 import SiteModal from "../../../components/SiteModal/SiteModal";
 import QRcodeCard from '../../../components/Card/QRcodeCard';
+import CancelModel from "../../../components/CancelModel/CancelModel";
 
 const MyEvents = () => {
   const [loading, setLoading] = useState(false);
@@ -13,6 +14,9 @@ const MyEvents = () => {
   const [showQR, setShowQR] = useState(false);
   const [eventQRcode, setQRcode] = useState("");
   const [eventName, setEventName] = useState("");
+  const [cancelOpen, setCancelOpen] = useState(false);
+  const [cancelText, setCancelText] = useState("");
+  const [itemId, setItemId] = useState();
 
   useEffect(() => {
     (async () => {
@@ -48,10 +52,19 @@ const MyEvents = () => {
     setEventName({ eventName: null });
     setShowQR(false);
   }
+  const renderCancelCard = useCallback(
+    (_id) => {
+        (async () => {
+            setItemId(_id)
+            setCancelText('האם את/ה בטוח/ה בביצוע פעולה זאת?');
+            setCancelOpen(true);
+        })();
+    }
+)
 
-
-  const handleCancel = useCallback(id => {
+  const handleEventCancel = useCallback(id => {
     (async () => {
+      setCancelOpen(false)
       setLoading(true);
       await EventsApi.delete(id);
       setModalOpen(true);
@@ -72,7 +85,7 @@ const MyEvents = () => {
   return (
     <Box>
       <Loader loaded={!loading}>
-        <MyEventList events={events} onCancel={handleCancel} onQRcode={onQRcodeClick} />
+        <MyEventList events={events} onItemCancel={renderCancelCard} onQRcode={onQRcodeClick} />
       </Loader>
       <SiteModal
         open={modalOpen}
@@ -80,12 +93,19 @@ const MyEvents = () => {
         text="הזמנה בוטלה בהצלחה!"
         onClose={() => setModalOpen(false)}
       />
+                  <CancelModel
+                open={cancelOpen}
+                title={`מחיקת הזמנה`}
+                text={cancelText}
+                onClose={() => setCancelOpen(false)}
+                onConfirm={() => handleEventCancel(itemId)}
+            />
       {showQR ? renderCard() : <></>}
     </Box>
   );
 };
 
-const MyEventList = ({ events, onCancel, onQRcode }) => {
+const MyEventList = ({ events, onItemCancel, onQRcode }) => {
   if (!events || !events.length) {
     return 'לא נמצאו פעילויות';
   }
@@ -93,7 +113,7 @@ const MyEventList = ({ events, onCancel, onQRcode }) => {
   return (
     <ul className="event-list">
       {events.map((event, idx) => (
-        <MyEventItem key={idx} {...event} onCancel={onCancel} onQRcode={onQRcode} />
+        <MyEventItem key={idx} {...event} onCancel={onItemCancel} onQRcode={onQRcode} />
       ))}
     </ul>
   );

@@ -8,7 +8,7 @@ import DatePicker from "../../components/DatePicker/DatePicker";
 import { getDateRangeByDate, getDateRange } from "../../utils/helpers";
 import moment from "moment";
 import Select from "../../components/Select/Select";
-import { treatmentNames, treatmentDesc } from "./consts";
+import { treatmentNames, treatmentDesc, treatmentPrice } from "./consts";
 import SiteModal from "../../components/SiteModal/SiteModal";
 import { Redirect } from "react-router-dom";
 
@@ -93,7 +93,7 @@ const Spa = () => {
             selected={date || allowedDates[0]}
           />
         </FormField>
-        <FormField title="בחר סוג טיפול">
+        <FormField title="בחר טיפול">
           <Select
             items={treatmentNames}
             value={treatmentName}
@@ -101,8 +101,9 @@ const Spa = () => {
           />
 
         </FormField>
-        <p style={{ paddingBottom: 20 }}>{treatmentDesc[treatmentName]}</p>
-        <FormField title="בחר טיפול">
+        <p style={{ paddingBottom: 8}}>{treatmentDesc[treatmentName]}</p>
+        <p style={{ paddingBottom: 20, fontWeight:'bold' }}>{`מחיר: ${treatmentPrice[treatmentName]}`}</p>
+        <FormField title="בחר שעה ומטפל">
           <SpaList list={_treatments} onItemClick={handleTreatmentClick} />
         </FormField>
       </Box>

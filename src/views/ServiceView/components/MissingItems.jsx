@@ -64,15 +64,15 @@ const MissingItems = () => {
       setModalOpen(true);
     }
   }, [
-    modal,
-    user.room,
-    modalOpen,
-    covers,
-    pillows,
-    shampoos,
-    towels,
-    requests
-  ]);
+      modal,
+      user.room,
+      modalOpen,
+      covers,
+      pillows,
+      shampoos,
+      towels,
+      requests
+    ]);
 
   useEffect(() => {
     (async () => {
@@ -80,7 +80,8 @@ const MissingItems = () => {
       try {
         const _room = await userStore.getRoomData();
         setRoom(_room);
-      } catch (e) {}
+        console.log(room)
+      } catch (e) { }
       setLoading(false);
     })();
   }, [room]);
@@ -96,28 +97,28 @@ const MissingItems = () => {
           <Box>
             <FormField title="שמיכה">
               <Select
-                items={generateNormalizedArray(missingItems.maxCovers)}
+                items={generateNormalizedArray(!room ? 4 : room.guest_amount)}
                 value={covers}
                 onChange={handleCoversChange}
               />
             </FormField>
             <FormField title="כריות">
               <Select
-                items={generateNormalizedArray(missingItems.maxPillows)}
+                items={generateNormalizedArray(!room ? 4 : room.guest_amount)}
                 value={pillows}
                 onChange={handlePillowsChange}
               />
             </FormField>
             <FormField title="מגבות">
               <Select
-                items={generateNormalizedArray(missingItems.maxTowels)}
+                items={generateNormalizedArray(!room ? 4 : room.guest_amount)}
                 value={towels}
                 onChange={handleTowelsChange}
               />
             </FormField>
             <FormField title="שמפו">
               <Select
-                items={generateNormalizedArray(missingItems.maxShampoos)}
+                items={generateNormalizedArray(!room ? 4 : room.guest_amount)}
                 value={shampoos}
                 onChange={handleShampoosChange}
               />
