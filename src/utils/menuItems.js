@@ -1,4 +1,4 @@
-import { cutlery, pool, waiter, event, lunch } from './icons';
+import { cutlery, pool, waiter, event } from './icons';
 
 export default [
     { title: 'חדר אוכל', iconUrl: cutlery, urlTarget: '/restaurant' },
