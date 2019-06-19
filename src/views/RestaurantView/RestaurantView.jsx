@@ -66,6 +66,7 @@ const RestaurantView = () => {
   const allowedTimes = meal
     ? generateTimes(parseInt(meal.startTime), parseInt(meal.endTime))
     : ["08:00"];
+    
   const allowedDates = room
     ? getDateRangeByDate(new Date(), new Date(room.enddate))
     : getDateRange(new Date(), 5);

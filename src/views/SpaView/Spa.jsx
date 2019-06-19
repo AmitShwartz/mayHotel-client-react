@@ -75,8 +75,11 @@ const Spa = () => {
     : getDateRange(new Date(), 5);
 
   const dateStr = date ? moment(date).format("MM/DD/YYYY") : moment(allowedDates[0]).format("MM/DD/YYYY");
-  const _treatments = treatments.filter(
-    treatment => moment(treatment.date).format("MM/DD/YYYY") === dateStr
+  const _treatments = treatments.filter(treatment => {
+    const now = moment().format();
+    return (moment(treatment.date).format("MM/DD/YYYY") === dateStr) && (treatment.date > now)
+  }
+
   );
 
   if (redirect) {
@@ -101,8 +104,8 @@ const Spa = () => {
           />
 
         </FormField>
-        <p style={{ paddingBottom: 8}}>{treatmentDesc[treatmentName]}</p>
-        <p style={{ paddingBottom: 20, fontWeight:'bold' }}>{`מחיר: ${treatmentPrice[treatmentName]}`}</p>
+        <p style={{ paddingBottom: 8 }}>{treatmentDesc[treatmentName]}</p>
+        <p style={{ paddingBottom: 20, fontWeight: 'bold' }}>{`מחיר: ${treatmentPrice[treatmentName]}`}</p>
         <FormField title="בחר שעה ומטפל">
           <SpaList list={_treatments} onItemClick={handleTreatmentClick} />
         </FormField>

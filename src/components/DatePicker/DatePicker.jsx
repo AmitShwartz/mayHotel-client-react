@@ -7,6 +7,7 @@ export default ({ onChange, selected, allowedDates }) => (
     <DatePicker
         onChange={onChange}
         selected={selected}
+        dateFormat="dd/MM/yyyy"
         withPortal
         includeDates={allowedDates}
     />

@@ -30,7 +30,7 @@ class MealBooking extends React.Component {
       modalTitle: "",
       modalText: "",
       loading: false,
-      success: false
+      success: false,
     };
   }
 
@@ -64,7 +64,7 @@ class MealBooking extends React.Component {
             modalText: " החדר אוכל בתפוסה מלאה מוזמן להנות עם קופונים מתנת המלון"
           });
           return;
-        }else if (result.data.data.massage){
+        } else if (result.data.data.massage) {
           this.setState({
             loading: false,
             modalOpen: true,
@@ -122,8 +122,7 @@ class MealBooking extends React.Component {
       modalOpen,
       modalText,
       modalTitle,
-      loading,
-      time
+      loading
     } = this.state;
     const {
       maxGuests,
@@ -132,6 +131,21 @@ class MealBooking extends React.Component {
       mealId,
       mealName
     } = this.props;
+    console.log(moment(date).format('DD/MM/YYYY HH:MM'))
+    console.log(moment().format('DD/MM/YYYY HH:MM'))
+    console.log(allowedTimes[0])
+    const now = {
+      time: moment().format('HH:MM'),
+      date: moment().format('DD/MM/YYYY')
+    }
+    const selected = {
+      time: allowedTimes[0],
+      date: moment(date).format('DD/MM/YYYY')
+    }
+
+    let found = false;
+    if ((now.date < selected.date)||((now.date === selected.date) && (now.time < selected.time)))
+      found = true;
 
     return (
       <Loader loaded={!loading}>
@@ -141,11 +155,11 @@ class MealBooking extends React.Component {
               <Box>
                 <p>
                   אורח יקר,
-                  <br />
+                    <br />
                   באפשרותך לשריין מקום לארוחה לפי תאריך, שעה ומספר סועדים.
                   לידיעתך, השריון תקף לחצי שעה הראשונה של הארוחה בלבד.
-                  <br />
-                  שעות פעילות ב{mealName}:{" "}
+                    <br />
+                  שעות פעילות ארוחת ה{mealName}:{" "}
                   <strong>
                     {allowedTimes[0]} - {allowedTimes[allowedTimes.length - 2]}
                   </strong>
@@ -175,7 +189,7 @@ class MealBooking extends React.Component {
                 </FormField>
               </Box>
               <Box>
-                <SubmitButton>הזמן</SubmitButton>
+                {found ? <SubmitButton>הזמן</SubmitButton> : <p className='notFound'>מצטערים! תם זמן אפשרות השיריון לארוחה זו, ביכולתך לשריין במועד עתידי.  שהייה מהנה.</p>}
               </Box>
             </Box>
           </Form>
@@ -192,7 +206,7 @@ class MealBooking extends React.Component {
           />
         </div>
       </Loader>
-    );
+    )
   }
 }
 

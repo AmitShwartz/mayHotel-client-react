@@ -10,6 +10,7 @@ import Select from "../../../components/Select/Select";
 import DatePicker from "../../../components/DatePicker/DatePicker";
 import { eventTypes } from "../consts";
 import moment from "moment";
+
 import classNames from "classnames";
 import { Redirect } from "react-router-dom";
 import 'array-flat-polyfill';
@@ -70,9 +71,11 @@ const AllEvents = () => {
     const _mDate = moment(_date, dateFormat)
       .startOf("day")
       .toISOString();
+
     return _events.filter(event => {
+      const now = moment().format();
       const isInDate =
-        moment(event.string.date, dateFormat).toISOString() === _mDate;
+        (moment(event.string.date, dateFormat).toISOString() === _mDate) && (now < event.date);
       return (
         isInDate &&
         event.category
@@ -116,7 +119,7 @@ const AllEvents = () => {
         const room = await userStore.getRoomData();
         setRoom(room);
 
-        const user_dates = await getDateRangeByDate(moment(new Date().setHours(0, 0, 0, 0)).add(-1,"days"), moment(new Date(room.enddate).setHours(0, 0, 0, 0)).add(-1,"days"))
+        const user_dates = await getDateRangeByDate(moment(new Date().setHours(0, 0, 0, 0)), moment(new Date(room.enddate).setHours(0, 0, 0, 0)))
         const _dates = _events.map(ev => ev.string.date).filter(onlyUnique);
         console.log(_dates)
         console.log(user_dates)
@@ -216,10 +219,11 @@ const EventItem = ({
       className={classNames("event-item", { full: counter === capacity })}
     >
       <div className="event-item-top">
-        <h3 className="event-item-name">{name}</h3>
-        <span className="event-item-details">
+      <span className="event-item-details">
           {location}, {string.time}
         </span>
+        <h3 className="event-item-name">{name}</h3>
+
       </div>
       <p className="event-item-content">{content}</p>
     </li>

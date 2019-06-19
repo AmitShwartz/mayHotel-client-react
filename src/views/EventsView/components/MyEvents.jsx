@@ -125,17 +125,13 @@ const MyEventItem = ({ _id, qrcode, name, amount, location, string, content, onC
         <div className="my-event-left">
           <CancelButton onClick={() => onCancel(_id)} />
         </div>
-
-        <span className="my-event-item-details">
-          {location}, {string.date} {string.time}
-        </span>
+        <h3 className="my-event-item-name">{name}</h3>
       </div>
-      <h3 className="my-event-item-name">{name}</h3>
-      <p className="my-event-item-content">{content}</p>
+      <p className="event-item-content">{content}<br/>{location}, {string.date} {string.time}</p>
       <Box>
         <img src={qrcode} alt={name} onClick={() => onQRcode(qrcode, name)} />
       </Box>
-      <p className="my-event-item-content">{`הזמנות: ${amount}`}</p>
+      <p className="event-item-content">{`הזמנות: ${amount}`}</p>
     </li>
   );
 };
