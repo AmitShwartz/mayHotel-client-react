@@ -11,6 +11,7 @@ import missingItems from "../static/images/icons/missingItems.svg";
 import pool from "../static/images/icons/pool.svg";
 import waiter from "../static/images/icons/waiter.svg";
 import wakeUp from "../static/images/icons/wakeup.svg";
+import contact from "../static/images/icons/contact.svg"
 import user from "../static/images/icons/user.png";
 
 export {
@@ -27,5 +28,6 @@ export {
   waiter,
   wakeUp,
   pool,
-  user
+  user,
+  contact
 };

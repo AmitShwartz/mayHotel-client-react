@@ -144,3 +144,7 @@ export const VoucherApi = {
       voucher_id
     })
 };
+
+export const HotelApi = {
+  get: async hotel_id => await http.get(`hotels/${hotel_id}`),
+};

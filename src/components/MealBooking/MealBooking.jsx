@@ -131,9 +131,7 @@ class MealBooking extends React.Component {
       mealId,
       mealName
     } = this.props;
-    console.log(moment(date).format('DD/MM/YYYY HH:MM'))
-    console.log(moment().format('DD/MM/YYYY HH:MM'))
-    console.log(allowedTimes[0])
+
     const now = {
       time: moment().format('HH:MM'),
       date: moment().format('DD/MM/YYYY')

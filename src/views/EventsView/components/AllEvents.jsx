@@ -121,8 +121,8 @@ const AllEvents = () => {
 
         const user_dates = await getDateRangeByDate(moment(new Date().setHours(0, 0, 0, 0)), moment(new Date(room.enddate).setHours(0, 0, 0, 0)))
         const _dates = _events.map(ev => ev.string.date).filter(onlyUnique);
-        console.log(_dates)
-        console.log(user_dates)
+        // console.log(_dates)
+        // console.log(user_dates)
         setAllowedDates(_dates.map(x => moment(x, dateFormat).toDate()));
         setUserAllowedDates(user_dates)
         setFilteredEvents(

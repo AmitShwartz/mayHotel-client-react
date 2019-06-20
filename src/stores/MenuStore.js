@@ -1,9 +1,9 @@
 import { observable, decorate } from "mobx";
 import menuItems from "../utils/menuItems";
 import { createContext } from "react";
-import { maintenance } from '../utils/icons';
+import { maintenance, contact } from '../utils/icons';
 
-const _items = [...menuItems, { title: 'התנתק', iconUrl: maintenance, urlTarget: '/logout' }];
+const _items = [...menuItems, { title: 'צור קשר', iconUrl: contact, urlTarget: '/contact' }, { title: 'התנתק', iconUrl: maintenance, urlTarget: '/logout' }];
 
 class MenuStore {
   active = false;
