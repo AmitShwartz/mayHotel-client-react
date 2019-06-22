@@ -39,6 +39,16 @@ class UserStore {
     return this.user;
   }
 
+  async edit(phone, email, password, address) {
+    const result = await UserApi.edit(phone, email, password, address);
+    if (result == null) return;
+    const user = result.data;
+    user.user = { ...user.data, hote: this.user.hotel };
+    user.token = this.user.token;
+    set("user", user);
+    this.user = user;
+  }
+
   async getRoomData() {
     return (
       this.room ||
@@ -70,6 +80,7 @@ decorate(UserStore, {
   login: action,
   logout: action,
   signUp: action,
+  edit: action,
   updateUser: action,
   getRoomData: action,
   user: observable,

@@ -22,7 +22,9 @@ const HeaderContent = () => {
   return (
     <div className="site-header-content">
       <div className="site-header-user-icon">
-        <img src={userIcon} className="site-icon" alt="user icon" />
+        <Link to="/edit">
+          <img src={userIcon} className="site-icon" alt="user icon" />
+        </Link>
         <span>{user.firstname}</span>
       </div>
       <div className="site-header-logo">

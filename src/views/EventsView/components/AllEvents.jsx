@@ -76,12 +76,14 @@ const AllEvents = () => {
       const now = moment().format();
       const isInDate =
         (moment(event.string.date, dateFormat).toISOString() === _mDate) && (now < event.date);
+      if(_category !== 'ללא')
       return (
         isInDate &&
         event.category
           .map(x => x.toLowerCase())
           .includes(_category.toLowerCase())
-      );
+      )
+      else return (isInDate);
     });
   };
 
@@ -109,10 +111,11 @@ const AllEvents = () => {
         const result = await EventsApi.get(user.hotel);
         const _events = result.data.data;
         setEvents(_events);
-        const _categories = _events
+        let _categories = _events
           .map(ev => ev.category.map(cat => cat.toLowerCase()))
           .flat()
           .filter(onlyUnique);
+        _categories = ['ללא', ..._categories];
         setCategories(generateCategorySelect(_categories));
         const currentCategory = _categories[0];
         setCategory(currentCategory);
@@ -121,8 +124,7 @@ const AllEvents = () => {
 
         const user_dates = await getDateRangeByDate(moment(new Date().setHours(0, 0, 0, 0)), moment(new Date(room.enddate).setHours(0, 0, 0, 0)))
         const _dates = _events.map(ev => ev.string.date).filter(onlyUnique);
-        // console.log(_dates)
-        // console.log(user_dates)
+
         setAllowedDates(_dates.map(x => moment(x, dateFormat).toDate()));
         setUserAllowedDates(user_dates)
         setFilteredEvents(

@@ -15,6 +15,7 @@ import LogoutView from "./views/LogoutView/LogoutView";
 import AnonymousRoute from "./components/Routes/AnonymousRoute";
 import OrdersView from "./views/RestaurantView/OrdersView";
 import ContactView from "./views/ContactView/ContactView";
+import EditView from "./views/EditView/EditView";
 
 const browserHistory = createBrowserHistory();
 
@@ -28,6 +29,7 @@ const App = () => {
         <AnonymousRoute path="/login" component={LoginView} />
         <AnonymousRoute path="/signup" component={SignUpView} />
         <ProtectedRoute path="/" component={HomeView} exact />
+        <ProtectedRoute path="/edit" component={EditView} />
         <ProtectedRoute path="/restaurant" component={RestaurantView} />
         <ProtectedRoute path="/orders" component={OrdersView} />
         <ProtectedRoute path="/room-service" component={ServiceView} />

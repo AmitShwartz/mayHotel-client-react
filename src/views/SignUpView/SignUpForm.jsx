@@ -54,7 +54,7 @@ class SignUpForm extends React.Component {
         return (
             <Box>
                 <Loader loaded={!this.state.loading}>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit} >
                         <FormField title="דואר אלקטרוני">
                             <Input
                                 value={email}
@@ -74,7 +74,7 @@ class SignUpForm extends React.Component {
                             />
                         </FormField>
                         <FormField title="מס' תעודת זהות">
-                            <Input value={_id} name="_id" onChange={this.handleInputChange} />
+                            <Input value={_id} name="_id" onChange={this.handleInputChange} dir="ltr" />
                         </FormField>
                         <FormField title="שם פרטי">
                             <Input value={firstname} name="firstname" onChange={this.handleInputChange} />
@@ -83,7 +83,7 @@ class SignUpForm extends React.Component {
                             <Input value={lastname} name="lastname" onChange={this.handleInputChange} />
                         </FormField>
                         <FormField title="מספר טלפון">
-                            <Input value={phone} name="phone" onChange={this.handleInputChange} />
+                            <Input value={phone} name="phone" onChange={this.handleInputChange} dir="ltr" />
                         </FormField>
                         <FormField title="כתובת מגורים">
                             <Input value={address} name="address" onChange={this.handleInputChange} />

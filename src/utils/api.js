@@ -35,7 +35,10 @@ const http = {
     await axios.post(generateUrl(path), data, {
       headers: getHeaders(auth)
     }),
-  put: async (path, data) => await axios.put(generateUrl(path), data),
+  put: async (path, data, auth = false) =>
+    await axios.put(generateUrl(path), data, {
+      headers: getHeaders(auth)
+    }),
   delete: async (path, data, auth = false) =>
     await axios.request({
       url: generateUrl(path),
@@ -60,6 +63,16 @@ export const UserApi = {
       address,
       phone
     }),
+  edit: async (phone, email, password, address) =>
+    await http.put(
+      "users/me", {
+        phone,
+        email,
+        password,
+        address
+      },
+      true
+    ),
   events: async () => await http.get("users/me/events", true),
   spa: async () => await http.get("users/me/spa", true),
   orders: async () => await http.get("users/me/orders", true),

@@ -23,7 +23,6 @@ const ContactView = () => {
         setLoading(true);
         const result = await HotelApi.get(user.hotel);
         const _hotel = result.data.data;
-        console.log(_hotel)
         await setHotel(_hotel);
       } catch (e) {
         setHotel(null);
@@ -33,9 +32,9 @@ const ContactView = () => {
   }, []);
 
   const renderList = () => (
-    <div className='contact-list'>
-      <h1 className='title'>{hotel.name}</h1>
-      <div className='list'>
+    <div className='contact'>
+      <h1 className='contact-title'>{hotel.name}</h1>
+      <div className='contact-list'>
         <ul >
           <li><strong><PhoneOutlined style={{fontSize:'30px'}}/>   טלפון קבלה: </strong> <a href={`tel:${hotel.phone}`}>{hotel.phone}</a></li>
           <li><strong><PrintOutlined style={{fontSize:'30px'}}/>   פקס: </strong> {hotel.fax}</li>

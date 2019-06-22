@@ -1,6 +1,6 @@
 @import '../../vars.scss';
 
-.contact-list {
+.contact {
   position: absolute;
   left:50%;
   width: 100%;
@@ -10,37 +10,36 @@
   text-align: center;
 }
 
-.title {  
+.contact-title {  
 font-weight: bold;
 color: $primary;
 font-size:26px;
 margin-bottom: 10px;
 margin-top: 20px;
 }
-a{
+.contact-list a{
   text-decoration: none;
 }
 a:visited{
   color: blue;
 }
 
-.list{
+.contact-list{
   height: 100%;
   width: 100%;
   border: 1px;
  text-align: right;
- z-index: 100;
  padding-top: 10px;
 }
-.list>ul{
+.contact-list>ul{
   margin: 20px
 }
-.list>ul>li{
+.contact-list>ul>li{
   padding-right: 13px;
   padding-bottom:40px; 
   direction: rtl;
 }
-.list>ul>li>strong{
+.contact-list>ul>li>strong{
   font-weight: bold;
   color:$primary;
 }
