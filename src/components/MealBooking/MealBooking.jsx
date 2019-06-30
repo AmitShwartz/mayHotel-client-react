@@ -134,14 +134,16 @@ class MealBooking extends React.Component {
 
     const now = {
       time: moment().format('HH:MM'),
-      date: moment().format('DD/MM/YYYY')
+      date: moment().format()
     }
     const selected = {
       time: allowedTimes[0],
-      date: moment(date).format('DD/MM/YYYY')
+      date: moment(date).format()
     }
 
     let found = false;
+    console.log(now.date)
+    console.log(selected.date)
     if ((now.date < selected.date)||((now.date === selected.date) && (now.time < selected.time)))
       found = true;
 
